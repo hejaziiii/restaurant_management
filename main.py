@@ -79,6 +79,25 @@ def main():
     # Print total statistic: account state of the restauran
     print("\nTotal statistic:")
     print("Total balance:", restaurant.balance)
+    
+    
+    # five customers with highest money
+    customers.sort(key=lambda x: x.money, reverse=True)
+    print("\nFive customers with highest money:")
+    for i in range(5):
+        print(customers[i].name, customers[i].money)
+
+    # five customers with lowest money
+    customers.sort(key=lambda x: x.money)
+    print("\nFive customers with lowest money:")
+    for i in range(5):
+        print(customers[i].name, customers[i].money)
+
+
+    # Print total statistic: account state of the restauran
+    print("\nTotal statistic:")
+    print("Total balance:", restaurant.balance)
+
 
 
 main()
