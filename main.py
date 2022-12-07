@@ -40,37 +40,45 @@ def random_money():
     return random.randint(50, 100)
 
 def random_type():
-    return random.choice(["single", "pair"])
+    return random.choice(["single", "pair", "family"])
 
-def generate_customers():
-    customers = []
-    for i in range(2000):
-        name = random_string(random.randint(5, 12))
-        money = random_money()
-        customer_type = random_type()
-        customers.append(Customer(name, money, customer_type))
-    return customers
-
-def simulate(customers, restaurant):
-    for i in range(6):
-        for customer in customers:
-            if random.random() < 0.01 and customer.type == "single":
-                restaurant.place_customer(customer)
-            elif random.random() < 0.02 and customer.type == "pair":
-                restaurant.place_customer(customer)
-    return restaurant
 
 def main():
-    restaurant = Restaurant(10000)
-    customers = generate_customers()
+    restaurant = Restaurant(5000000)
+    customers = []
+    for i in range(2000):
+        customers.append(Customer(random_string(), random_money(), random_type()))
+
     for i in range(3):
-        restaurant = simulate(customers, restaurant)
-        print("Month: ", i+1)
-        print("Restaurant balance: ", restaurant.balance)
-        print("Restaurant seats: ", restaurant.seats)
-        print("")
-    print("Total balance: ", restaurant.balance)
+      for d in range(30):
+        for j in range(6):
+          # store minimum number of busy seats
+            min_busy_seats = restaurant.seats
+            for k in range(24):
+                if random.random() < 0.01 and restaurant.seats > 0:
+                    restaurant.place_customer(customers.pop())
+                if restaurant.seats < min_busy_seats:
+                    min_busy_seats = restaurant.seats
+            print("\nDaily statistic:")
+            # Print daily statistic: minimum number of busy seats
+            print("Minimum number of busy seats:", min_busy_seats)
+            # Print daily statistic: account state of the restaurant
+            print("Restaurant balance:", restaurant.balance)
+            for customer in customers:
+                if random.random() < 0.01 and customer.type == "single":
+                    restaurant.place_customer(customer)
+                elif random.random() < 0.02 and customer.type == "pair":
+                    restaurant.place_customer(customer)
+                elif random.random() < 0.03 and customer.type == "family":
+                    restaurant.place_customer(customer)
+      print("\nMonthly statistic:")
+      print("Restaurant balance:", restaurant.balance)
+      print("Restaurant seats:", restaurant.seats)
+      print("")
+
+    # Print total statistic: account state of the restauran
+    print("\nTotal statistic:")
+    print("Total balance:", restaurant.balance)
+
 
 main()
-
-
