@@ -76,7 +76,7 @@ def main():
       print("Restaurant seats:", restaurant.seats)
       print("")
 
-    # Print total statistic: account state of the restauran
+    # Print total statistic: account state of the restaurant
     print("\nTotal statistic:")
     print("Total balance:", restaurant.balance)
     
@@ -94,7 +94,7 @@ def main():
         print(customers[i].name, customers[i].money)
 
 
-    # Print total statistic: account state of the restauran
+    # Print total statistic: account state of the restaurant
     print("\nTotal statistic:")
     print("Total balance:", restaurant.balance)
 
